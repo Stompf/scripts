@@ -1,6 +1,7 @@
 param (
     [Parameter(Mandatory = $true)][string]$path,
-    [switch]$useDirectoryName
+    [switch]$useDirectoryName,
+    [switch]$testRun
 )
 
 Get-ChildItem $path -File -recurse | Where-Object { $_.Name.Contains(' - ') } | Rename-Item -NewName { $_.Name -replace ' - ', '.' }
@@ -11,6 +12,10 @@ $filelist = Get-ChildItem $path -filter *.avi -recurse
 $num = $filelist | Measure-Object
 $filecount = $num.count
  
+if ($testRun.IsPresent) {
+    Write-Host "Test flag active, will only convert first file and not delete source"
+}
+
 $i = 0;
 ForEach ($file in $filelist) {
     $i++;
@@ -37,6 +42,10 @@ ForEach ($file in $filelist) {
     
     if ($proc.ExitCode -ne 0) {
         throw "$_ exited with status code $($proc.ExitCode)"
+    }
+    elseif ($testRun.IsPresent) {
+        Write-Host "Test run completed"
+        break;
     }
     else {
         Remove-Item "$oldfile"
