@@ -61,7 +61,7 @@ ForEach ($file in $filelist) {
         Write-Host "srt args: $srtArg"
     }
 
-    $proc = Start-Process "C:\Program Files\HandBrake\HandBrakeCLI.exe" -ArgumentList "-O -Z `"Fast 1080p30`" -i `"$oldfile`" -o `"$newfile`" -v=1 $srtArg" -Wait -NoNewWindow -PassThru
+    $proc = Start-Process "C:\Program Files\HandBrake\HandBrakeCLI.exe" -ArgumentList "-O -Z `"Fast 1080p30`" -i `"$oldfile`" -o `"$newfile`" -v=1 $srtArg --all-audio" -Wait -NoNewWindow -PassThru
     
     if ($proc.ExitCode -ne 0) {
         throw "$_ exited with status code $($proc.ExitCode)"
