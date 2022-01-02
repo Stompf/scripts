@@ -74,7 +74,7 @@ do
 
     echo "Transforming to file: $newfile" 
 
-    HandBrakeCLI -O -Z "Fast 1080p30" -i "$oldfile" -o "$newfile" -v=1 --all-audio --all-subtitles
+    HandBrakeCLI -O -Z "Fast 1080p30" -i "$oldfile" -o "$newfile" -v=1 --all-audio --all-subtitles --subtitle-burned=none
 
     if [ "$TEST_FLAG" -eq "1" ]; then
         echo "Test run completed"
