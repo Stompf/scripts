@@ -76,7 +76,7 @@ if [ "$KEEP_FLAG" -eq "1" ]; then
     exit;
 fi
 
-# rm "$oldfile"
+rm "$oldfile"
 
 
  
