@@ -36,6 +36,9 @@ while :; do
         --path=)         # Handle the case of an empty --file=
             die 'ERROR: "--path" requires a non-empty option argument.'
             ;;
+        -s|--sub)
+            SUBTRACK=$1
+            ;;           
         -v|--verbose)
             verbose=$((verbose + 1))  # Each -v adds 1 to verbosity.
             ;;
@@ -62,7 +65,12 @@ if [ "$TEST_FLAG" -eq "1" ]; then
    echo "Test flag active, will only convert first file and not delete source";
 fi
 
-# find $BASE_PATH -type f -name "*.avi" -exec echo {} \; -exec message='The secret code is 12345' echo "${message//[0-9]/X}" \;
+SUBARGS="--all-audio --all-subtitles --subtitle-burned=none"
+if [ "$SUBTRACK" ]; then
+    SUBARGS="--subtitle=\"$SUBTRACK\" --subtitle-forced --subtitle-burned"
+    echo "Subtrack active, will burn in subtrack $SUBTRACK";
+    echo "$SUBARGS";
+fi
 
 while IFS= read -r -d '' -u 9
 do
@@ -74,7 +82,7 @@ do
 
     echo "Transforming to file: $newfile" 
 
-    HandBrakeCLI -O -Z "Fast 1080p30" -i "$oldfile" -o "$newfile" -v=1 --all-audio --all-subtitles --subtitle-burned=none
+    HandBrakeCLI -O -Z "Fast 1080p30" -i "$oldfile" -o "$newfile" -v=1 $SUBARGS
 
     if [ "$TEST_FLAG" -eq "1" ]; then
         echo "Test run completed"
