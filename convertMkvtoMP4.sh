@@ -37,7 +37,7 @@ while :; do
             die 'ERROR: "--path" requires a non-empty option argument.'
             ;;
         -s|--sub)
-            SUBTRACK=$1
+            SUBTRACK=$2
             ;;           
         -v|--verbose)
             verbose=$((verbose + 1))  # Each -v adds 1 to verbosity.
