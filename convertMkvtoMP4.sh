@@ -66,7 +66,7 @@ fi
 
 SUBARGS="--all-audio --all-subtitles --subtitle-burned=none"
 if [ "$SUBTRACK" ]; then
-    SUBARGS=" --subtitle-lang-list swe,eng --subtitle-forced --subtitle-burned"
+    SUBARGS=" --subtitle-lang-list swe,eng --subtitle-forced --subtitle-burned --subtitle-default=\"none\""
     echo "$SUBARGS";
 fi
 
