@@ -36,7 +36,7 @@ while :; do
             die 'ERROR: "--path" requires a non-empty option argument.'
             ;;
         -s|--sub)
-            SUBTRACK=$2
+            SUBTRACK=1
             ;;           
         -v|--verbose)
             verbose=$((verbose + 1))  # Each -v adds 1 to verbosity.
@@ -66,8 +66,7 @@ fi
 
 SUBARGS="--all-audio --all-subtitles --subtitle-burned=none"
 if [ "$SUBTRACK" ]; then
-    SUBARGS="--subtitle=\"$SUBTRACK\" --subtitle-forced --subtitle-burned"
-    echo "Subtrack active, will burn in subtrack $SUBTRACK";
+    SUBARGS=" --subtitle-lang-list swe --subtitle-forced --subtitle-burned"
     echo "$SUBARGS";
 fi
 
