@@ -13,7 +13,6 @@ show_help() {
 # Initialize all the option variables.
 # This ensures we are not contaminated by variables from the environment.
 BASE_PATH=
-TEST_FLAG=0
 verbose=0
 
 while :; do
@@ -61,7 +60,7 @@ done
 
 echo "Searching $BASE_PATH"
 
-if [ "$TEST_FLAG" -eq "1" ]; then
+if [ "$TEST_FLAG" ]; then
    echo "Test flag active, will only convert first file and not delete source";
 fi
 
@@ -84,7 +83,7 @@ do
 
     HandBrakeCLI -O -Z "Fast 1080p30" -i "$oldfile" -o "$newfile" -v=1 $SUBARGS
 
-    if [ "$TEST_FLAG" -eq "1" ]; then
+    if [ "$TEST_FLAG" ]; then
         echo "Test run completed"
         exit;    
     fi
