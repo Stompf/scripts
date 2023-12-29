@@ -13,7 +13,6 @@ show_help() {
 # Initialize all the option variables.
 # This ensures we are not contaminated by variables from the environment.
 FILE_PATH=
-KEEP_FLAG=0
 verbose=0
 
 while :; do
@@ -58,7 +57,7 @@ done
 
 echo "Searching $FILE_PATH"
 
-if [ "$KEEP_FLAG" -eq "1" ]; then
+if [ "$KEEP_FLAG" ]; then
    echo "Test flag active, will only convert first file and not delete source";
 fi
 
@@ -71,7 +70,7 @@ echo "Transforming to file: $newfile"
 
 HandBrakeCLI -O -Z "Fast 1080p30" -i "$oldfile" -o "$newfile" -v=1
 
-if [ "$KEEP_FLAG" -eq "1" ]; then
+if [ "$KEEP_FLAG" ]; then
     echo "Test run completed"
     exit;
 fi
