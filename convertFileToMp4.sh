@@ -76,6 +76,7 @@ if [ "$KEEP_FLAG" ]; then
 fi
 
 rm "$oldfile"
+mv "$newfile" "$oldfile"
 
 
  
