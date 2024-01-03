@@ -83,6 +83,6 @@ do
 
     rm "$oldfile"
 
-done 9< <( find $BASE_PATH -type f -name "*.avi" -exec printf '%s\0' {} + )
+done 9< <( find "$BASE_PATH" -type f -name "*.avi" -exec printf '%s\0' {} + )
 
  
